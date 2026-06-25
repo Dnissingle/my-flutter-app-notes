@@ -12,13 +12,13 @@ class Note {
   int? estimatedTime;
 
   Note(
-    {
-      required this.title,
-      required this.description,
-      required this.isCompleted,
-      required this.toBuild,
-      this.estimatedTime,
-    });
+      {
+        required this.title,
+        required this.description,
+        required this.isCompleted,
+        required this.toBuild,
+        this.estimatedTime,
+      });
 
 }
 
@@ -31,32 +31,32 @@ class MyApp extends StatelessWidget {
       estimatedTime: 2
   ),
     Note(
-      title: 'Day 2',
-      description: 'Dart: Variables,Types,Functions',
+        title: 'Day 2',
+        description: 'Dart: Variables,Types,Functions',
+        isCompleted: true,
+        toBuild: 'Build simple Calculator',
+        estimatedTime: 2
+    ),
+    Note(
+      title: 'Day 3',
+      description: 'Dart: Class and Constructors',
       isCompleted: true,
-      toBuild: 'Build simple Calculator',
-      estimatedTime: 2
-  ),
+      toBuild: 'Build Note Model',
+    ),
     Note(
-  title: 'Day 3',
-  description: 'Dart: Class and Constructors',
-  isCompleted: true,
-  toBuild: 'Build Note Model',
-  ),
-  Note(
-  title: 'Day 4',
-  description: 'Flutter: MaterialApp, Scaffold, Container,Text',
-  isCompleted: false,
-  toBuild: 'Static Profile UI',
-  estimatedTime: 2
-  ),
+        title: 'Day 4',
+        description: 'Flutter: MaterialApp, Scaffold, Container,Text',
+        isCompleted: true,
+        toBuild: 'Static Profile UI',
+        estimatedTime: 2
+    ),
     Note(
-      title: 'Day 5',
-      description: 'Flutter: Row, Column, and Expanded widgets',
-      isCompleted: false,
-      toBuild: 'Simple Login UI(no logic)',
-      estimatedTime: 2
-  ),
+        title: 'Day 5',
+        description: 'Flutter: Row, Column, and Expanded widgets',
+        isCompleted: false,
+        toBuild: 'Simple Login UI(no logic)',
+        estimatedTime: 2
+    ),
     Note(
         title: 'Day 6',
         description: 'Flutter: Stateful Widgets Basics',
@@ -84,10 +84,17 @@ class MyApp extends StatelessWidget {
             final note = notes[index];
 
             return Card(
-              margin: EdgeInsets.all(8),
+              margin: EdgeInsets.all(10),
               child: ListTile(
                 title: Text(note.title),
-                subtitle: Text(note.description),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
+                  children: [
+                    Text(note.description),
+                    Text(
+                        note.toBuild),
+                  ],
+                ),
                 trailing: Icon(
                   note.isCompleted ? Icons.check : Icons.close,
                   color: note.isCompleted ? Colors.green : Colors.red,
