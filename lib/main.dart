@@ -46,14 +46,13 @@ class MyApp extends StatelessWidget {
     Note(
         title: 'Day 4',
         description: 'Flutter: MaterialApp, Scaffold, Container,Text',
-        isCompleted: true,
         toBuild: 'Static Profile UI',
         estimatedTime: 2
     ),
     Note(
         title: 'Day 5',
         description: 'Flutter: Row, Column, and Expanded widgets',
-        isCompleted: false,
+        isCompleted: true,
         toBuild: 'Simple Login UI(no logic)',
         estimatedTime: 2
     ),
