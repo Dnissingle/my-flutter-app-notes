@@ -1,151 +1,73 @@
 import 'package:flutter/material.dart';
-
+import 'package:note_model/todoweek1.dart';
+import 'package:note_model/week.dart';
 void main() {
-  runApp(MyApp());
-}
-
-class Note {
-  String title;
-  String description;
-  bool isCompleted;
-  String toBuild;
-  int? estimatedTime;
-
-  Note(
-      {
-        required this.title,
-        required this.description,
-        required this.isCompleted,
-        required this.toBuild,
-        this.estimatedTime,
-      });
-
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  List<Note> notes = [Note(
-      title: 'Day 1',
-      description: 'Flutter and Dart SDK',
-      isCompleted: true,
-      toBuild: 'Installation and setup',
-      estimatedTime: 2
-  ),
-    Note(
-        title: 'Day 2',
-        description: 'Dart: Variables,Types,Functions',
-        isCompleted: true,
-        toBuild: 'Build simple Calculator',
-        estimatedTime: 2
-    ),
-    Note(
-      title: 'Day 3',
-      description: 'Dart: Class and Constructors',
-      isCompleted: true,
-      toBuild: 'Build Note Model',
-    ),
-    Note(
-        title: 'Day 4',
-        description: 'Flutter: MaterialApp, Scaffold, Container,Text',
-        toBuild: 'Static Profile UI',
-        isCompleted: true,
-        estimatedTime: 2
-    ),
-    Note(
-        title: 'Day 5',
-        description: 'Flutter: Row, Column, and Expanded widgets',
-        isCompleted: true,
-        toBuild: 'Simple Login UI(no logic)',
-        estimatedTime: 2
-    ),
-    Note(
-        title: 'Day 6',
-        description: 'Flutter: Stateful Widgets Basics',
-        isCompleted: true,
-        toBuild: 'Build: Counter app (with button and state change)',
-        estimatedTime: 2
-    ),
-    Note(
-        title: 'Day 7',
-        description: 'Mini Project',
-        isCompleted: true,
-        toBuild: 'Simple Todo UI(add static items, no storage yet)',
-        estimatedTime: 2
-    ),
-  Note(
-  title: 'Day 8',
-  description: 'Lists in Dart',
-  isCompleted: true,
-  toBuild: 'Build: dynamic list in flutter',
-  estimatedTime: 2
-  ),
-  // Note(
-  // title: 'Day 2',
-  // description: 'Dart: Variables,Types,Functions',
-  // isCompleted: true,
-  // toBuild: 'Build simple Calculator',
-  // estimatedTime: 2
-  // ),
-  // Note(
-  // title: 'Day 3',
-  // description: 'Dart: Class and Constructors',
-  // isCompleted: true,
-  // toBuild: 'Build Note Model',
-  // ),
-  // Note(
-  // title: 'Day 4',
-  // description: 'Flutter: MaterialApp, Scaffold, Container,Text',
-  // toBuild: 'Static Profile UI',
-  // isCompleted: true,
-  // estimatedTime: 2
-  // ),
-  // Note(
-  // title: 'Day 5',
-  // description: 'Flutter: Row, Column, and Expanded widgets',
-  // isCompleted: true,
-  // toBuild: 'Simple Login UI(no logic)',
-  // estimatedTime: 2
-  // ),
-  // Note(
-  // title: 'Day 6',
-  // description: 'Flutter: Stateful Widgets Basics',
-  // isCompleted: true,
-  // toBuild: 'Build: Counter app (with button and state change)',
-  // estimatedTime: 2
-  // ),
-  // Note(
-  // title: 'Day 7',
-  // description: 'Mini Project',
-  // isCompleted: true,
-  // toBuild: 'Simple Todo UI(add static items, no storage yet)',
-  // estimatedTime: 2
-  // )
-  ];
+  const MyApp({super.key});
 
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("Notes")),
         body: ListView.builder(
-          itemCount: notes.length,
+          itemCount: learning.length,
           itemBuilder: (context, index) {
-            final note = notes[index];
+            final learningFlutter = learning[index];
 
             return Card(
               margin: EdgeInsets.all(10),
-              child: ListTile(
-                title: Text(note.title),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
-                  children: [
-                    Text(note.description),
-                    Text(
-                        note.toBuild),
-                  ],
-                ),
-                trailing: Icon(
-                  note.isCompleted ? Icons.check : Icons.close,
-                  color: note.isCompleted ? Colors.green : Colors.red,
+              child:  InkWell(
+                borderRadius: BorderRadius.circular(4), // Matches default Card corner radius
+                onTap: () {
+                  // 💡 Put your button action here
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => toDo()));
+                  print('Tapped on: ${learningFlutter.title}');
+                },
+
+                child: ListTile(
+                  title: Text(learningFlutter.title),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
+                    children: [
+                      Text(learningFlutter.description),
+                      Text(
+                        learningFlutter.goal,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+
                 ),
               ),
             );
