@@ -18,7 +18,14 @@ class Note {
 
 }
 
-class toDo extends StatelessWidget {
+class WeekOne extends StatefulWidget {
+  const WeekOne({super.key});
+
+  @override
+  State<WeekOne> createState() => _WeekOneState();
+}
+
+class _WeekOneState extends State<WeekOne> {
   List<Note> notes = [Note(
       title: 'Day 1',
       description: 'Flutter and Dart SDK',
@@ -121,7 +128,9 @@ class toDo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("Notes")),
+        appBar: AppBar(automaticallyImplyLeading: true,
+          title: Text("Day 1"),
+        centerTitle: true),
         body: ListView.builder(
           itemCount: notes.length,
           itemBuilder: (context, index) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_model/todoweek1.dart';
+import 'package:note_model/week1.dart';
 import 'package:note_model/week.dart';
+import 'package:note_model/week2.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -33,33 +34,49 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(title: Text("Notes")),
         body: ListView.builder(
           itemCount: learning.length,
           itemBuilder: (context, index) {
-            final learningFlutter = learning[index];
+            final week = learning[index];
 
             return Card(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child:  InkWell(
                 borderRadius: BorderRadius.circular(4), // Matches default Card corner radius
                 onTap: () {
                   // 💡 Put your button action here
+                  if (index == 0){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => toDo()));
-                  print('Tapped on: ${learningFlutter.title}');
-                },
+                    MaterialPageRoute(builder: (context) => const WeekOne(),
+                    ),
+                  );
+                }
+                  if (index == 1){
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const WeekTwo(),
+                  ),
+                  );
+                  }
+                  if (index == 2){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const WeekTwo(),
+                      ),
+                    );
+                  }
+
+                  print('Tapped on: ${week.title}');
+                  },
 
                 child: ListTile(
-                  title: Text(learningFlutter.title),
+                  title: Text(week.title),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
                     children: [
-                      Text(learningFlutter.description),
+                      Text(week.description),
                       Text(
-                        learningFlutter.goal,
+                        week.goal,
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
@@ -73,7 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           },
         ),
-      ),
-    );
+      );
   }
 }
